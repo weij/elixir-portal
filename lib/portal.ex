@@ -25,3 +25,24 @@ defmodule Portal do
   end
   
 end
+
+defimpl Inspect, for: Portal do
+  def inspect(%Portal{left: left, right: right}, _) do
+    left_door = inspect(left)
+    right_door = inspect(right)
+
+    left_data = Portal.Door.get(left) |> Enum.reverse |> inspect 
+    right_data = Portal.Door.get(right) |> inspect
+
+    max = max(String.length(left_door), String.length(left_data))
+
+    """
+    #Portal<
+      #{String.rjust(left_door, max)} <=> #{right_door}
+      #{String.rjust(left_data, max)} <=> #{right_data}
+    >
+    """
+  end
+  
+end
+
