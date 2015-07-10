@@ -1,4 +1,5 @@
 Portal
 ======
 
-** TODO: Add description **
+** Tutorial url **
+http://howistart.org/posts/elixir/1
