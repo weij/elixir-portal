@@ -1,6 +1,27 @@
 defmodule Portal do
-  defstruct [:left, :right]
+  use Application
+  
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
 
+    children = [
+      worker(Portal.Door, [])
+    ]
+
+    opts = [strategy: :simple_one_for_one, name: Portal.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+  
+  @doc """
+  Shoots a new door with the given `color`.
+  """
+  def shoot(color) do
+    Supervisor.start_child(Portal.Supervisor, [color])
+  end
+  
+
+  defstruct [:left, :right]
+  
   @doc """
   Starts transfering `data` from `left` to `right`.
   """
