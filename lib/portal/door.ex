@@ -1,4 +1,20 @@
 defmodule Portal.Door do
+  defstruct [:left, :right]
+
+  @doc """
+  Starts transfering `data` from `left` to `right`.
+  """
+  def transfer(left, right, data) do
+    for item <- data do
+      Portal.Door.push(left, item)
+    end
+  end
+
+  def push_right(portal) do
+    
+  end
+  
+  
 
   @doc """
   Starts a door with the given `color`.
